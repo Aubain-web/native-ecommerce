@@ -1,5 +1,5 @@
-import {View, Text} from "@/components/Themed";
-import {Image, StyleSheet, useColorScheme} from "react-native";
+import {Text, View} from "@/components/Themed";
+import {Image, Pressable, StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
 import Colors from "@/constants/Colors";
 
@@ -8,15 +8,17 @@ type Props = {
     name: string;
     type: string;
     price: number;
+    onPress: VoidFunction;
 }
 
-export const Card = ({photo_link, name, type, price}: Props): React.JSX.Element => {
+export const Card = ({photo_link, name, type, price, onPress}: Props): React.JSX.Element => {
     const styles = StyleSheet.create({
         container: {
             display: 'flex',
             flex: 1,
             flexDirection: 'column',
             marginBottom: 20,
+            paddingTop: 15,
         },
         addButton: {
             backgroundColor: Colors.light.tint,
@@ -52,12 +54,13 @@ export const Card = ({photo_link, name, type, price}: Props): React.JSX.Element 
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
+
             flex: 1
         }
     });
 
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={onPress}>
             <Image style={styles.image} source={{uri: photo_link}}/>
             <View style={styles.body}>
                 <View style={{display: 'flex', flexDirection: 'column'}}>
@@ -71,11 +74,11 @@ export const Card = ({photo_link, name, type, price}: Props): React.JSX.Element 
                     marginVertical: 10
                 }}>
                     <Text style={styles.price}>${price.toLocaleString()}</Text>
-                    <View style={styles.addButton}>
-                        <Text>+</Text>
-                    </View>
+                    <TouchableOpacity style={styles.addButton}>
+                        <Text style={{color: 'white', fontSize: 20}}>+</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </Pressable>
     );
 }
