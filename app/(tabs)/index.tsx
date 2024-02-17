@@ -19,7 +19,7 @@ export default function TabOneScreen() {
                                 type={product.category}
                                 price={product.price}
                                 name={product.title}
-                                onPress={() => router.push('/detail/1')}/>
+                                onPress={() => router.navigate({pathname: 'detail', params: {id: product.id}})}/>
                       )}/>
         </View>
     );
