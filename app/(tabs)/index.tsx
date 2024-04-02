@@ -1,15 +1,18 @@
-import {FlatList, StyleSheet} from 'react-native';
+import {Button, FlatList, StyleSheet} from 'react-native';
 import {View} from '@/components/Themed';
 import {Card} from "@/components/Card";
 import {useProducts} from "@/hooks/useProducts";
 import {router} from "expo-router";
+import {useClick} from "@/contexts/click.context";
 
 export default function TabOneScreen() {
     const {products} = useProducts();
+    const {setClickCount} = useClick();
 
     return (
         <View style={styles.container}>
-            <FlatList data={products}
+            <Button title="Press me" onPress={() => setClickCount?.(10)} />
+             <FlatList data={products}
                       keyExtractor={item => item.id.toString()}
                       numColumns={2}
                       columnWrapperStyle={{justifyContent: 'space-between', gap: 30}}
