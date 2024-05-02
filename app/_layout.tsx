@@ -7,6 +7,7 @@ import {useEffect} from 'react';
 
 import {useColorScheme} from '@/components/useColorScheme';
 import {ClickProvider} from "@/contexts/click.context";
+import {CartProvider} from "@/contexts/articleContext";
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -50,13 +51,13 @@ function RootLayoutNav() {
 
     return (
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <ClickProvider>
+            <CartProvider>
                 <Stack>
                     <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
                     <Stack.Screen name="detail" options={{headerShown: true}}/>
                     <Stack.Screen name="modal" options={{presentation: 'modal'}}/>
                 </Stack>
-            </ClickProvider>
+            </CartProvider>
         </ThemeProvider>
     );
 }

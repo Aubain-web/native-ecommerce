@@ -4,10 +4,13 @@ import {Text, View} from "@/components/Themed";
 import {useProduct} from "@/hooks/useProduct";
 import {ActivityIndicator, Image, SafeAreaView, StyleSheet, TouchableOpacity} from "react-native";
 import Colors from "@/constants/Colors";
+import {useCart} from "@/contexts/articleContext";
+import {Product} from "@/models/product";
 
 export default function DetailLayout() {
     const {id} = useLocalSearchParams();
     const {product} = useProduct({productId: id as string});
+    const {addToCart} = useCart();
 
     const styles = StyleSheet.create({
         container: {
@@ -55,6 +58,9 @@ export default function DetailLayout() {
         }
     });
 
+    const handleBuy = (product: Product) =>{
+            addToCart?.(product);
+    }
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
             {
@@ -65,7 +71,7 @@ export default function DetailLayout() {
                         <Text style={styles.subtitle}>{product.description}</Text>
                         <Text style={styles.price}>{product.price.toLocaleString()}$</Text>
                         <View style={{flex: 1}}/>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => handleBuy(product)}>
                             <Text style={{color: 'white', fontWeight: 'bold', textTransform: 'uppercase'}}>Buy</Text>
                         </TouchableOpacity>
                     </View>

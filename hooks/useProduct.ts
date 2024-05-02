@@ -12,7 +12,7 @@ type Props = {
 }
 
 export function useProduct({productId}: Props): Result {
-    const [product, setProduct] = useState<Product>();
+    const [product, setProduct] = useState<Product>( );
 
     useEffect(() => {
         void _retrieveProduct();

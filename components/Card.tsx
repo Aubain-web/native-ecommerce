@@ -2,6 +2,8 @@ import {Text, View} from "@/components/Themed";
 import {Image, Pressable, StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
 import Colors from "@/constants/Colors";
+import {useCart} from "@/contexts/articleContext";
+import {Product} from "@/models/product";
 
 type Props = {
     photo_link: string;
@@ -74,7 +76,7 @@ export const Card = ({photo_link, name, type, price, onPress}: Props): React.JSX
                     marginVertical: 10
                 }}>
                     <Text style={styles.price}>${price.toLocaleString()}</Text>
-                    <TouchableOpacity style={styles.addButton}>
+                    <TouchableOpacity style={styles.addButton} >
                         <Text style={{color: 'white', fontSize: 20}}>+</Text>
                     </TouchableOpacity>
                 </View>
